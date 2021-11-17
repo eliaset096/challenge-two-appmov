@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.mobileapps.reto2_appmov.R;
 import com.mobileapps.reto2_appmov.databinding.ActivityHomeBinding;
+import com.mobileapps.reto2_appmov.model.Pokemon;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -20,7 +21,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(homeBinding.getRoot());
 
         btSearchPokemon = findViewById(R.id.btSearchPokemon);
         btSearchPokemon.setOnClickListener(this::searchPokemon);
@@ -31,6 +33,24 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(view.getContext(), DetailsActivity.class);
         startActivity(intent);
     }
+
+    public void addPokemon(Pokemon pokemon){
+
+    }
+
+    private void getPokemon(){
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 }

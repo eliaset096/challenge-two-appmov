@@ -9,8 +9,11 @@ import android.widget.Button;
 
 import com.mobileapps.reto2_appmov.R;
 import com.mobileapps.reto2_appmov.databinding.ActivityLoginBinding;
+import com.mobileapps.reto2_appmov.model.Pokemon;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private Pokemon pokemon;
 
     // Permite acceso a los elementos gráficos
     private ActivityLoginBinding loginBinding;
@@ -20,7 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        loginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(loginBinding.getRoot());
         //getActionBar().hide();
 
         btLogin = findViewById(R.id.btLogin);
