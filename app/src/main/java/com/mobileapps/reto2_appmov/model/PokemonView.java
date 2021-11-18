@@ -28,16 +28,19 @@ public class PokemonView extends RecyclerView.ViewHolder {
     }
 
 
-    public void setPokemon(Pokemon pokemon){
+    public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
     }
-    private void selectRow(View view){
+
+    private void selectRow(View view) {
         listener.onSelect(pokemon);
     }
-    public interface OnSelectPokemon{
+
+    public interface OnSelectPokemon {
         void onSelect(Pokemon pokemon);
     }
-    public void setListener(OnSelectPokemon listener){
+
+    public void setListener(OnSelectPokemon listener) {
         this.listener = listener;
     }
 
@@ -45,12 +48,15 @@ public class PokemonView extends RecyclerView.ViewHolder {
     public TextView getTvNamePokemonRow() {
         return tvNamePokemonRow;
     }
+
     public void setTvNamePokemonRow(TextView tvNamePokemonRow) {
         this.tvNamePokemonRow = tvNamePokemonRow;
     }
+
     public ImageView getIvPhotoPokemonRow() {
         return ivPhotoPokemonRow;
     }
+
     public void setIvPhotoPokemonRow(ImageView ivPhotoPokemonRow) {
         this.ivPhotoPokemonRow = ivPhotoPokemonRow;
     }

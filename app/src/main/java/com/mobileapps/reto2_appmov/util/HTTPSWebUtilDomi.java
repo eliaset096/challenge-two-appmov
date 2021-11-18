@@ -57,7 +57,7 @@ public class HTTPSWebUtilDomi {
     public String GETrequest(String pokemonName) {
         try {
             // URL de la pokeapi
-            URL page = new URL("https://pokeapi.co/api/v2/pokemon/"+pokemonName);
+            URL page = new URL("https://pokeapi.co/api/v2/pokemon/" + pokemonName);
             HttpsURLConnection connection = (HttpsURLConnection) page.openConnection();
             connection.setRequestMethod("GET");
             //connection.setRequestProperty("Authorization", "Bearer BQA9uzSqEFBIIUtnpwinsx6wVDI64fmDViiIjKddReoKNtNVnj230Xaes9G8AwZlyZNQy39m5jHH3aZQH7D6yYGUqW-Je-yBF7RGxFH_cJuMmbuHEGUCirDCKhnAZlxoIdCHfa10LXhN0YmjX-ECGfXlvQCBYG-9eNo8jw");
@@ -72,7 +72,7 @@ public class HTTPSWebUtilDomi {
             baos.close();
             connection.disconnect();
             return new String(baos.toByteArray(), "UTF-8");
-        }catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
             return "";
         }
@@ -107,7 +107,7 @@ public class HTTPSWebUtilDomi {
             os.close();
             connection.disconnect();
             return new String(baos.toByteArray(), "UTF-8");
-        }catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
             return "";
         }
@@ -140,7 +140,7 @@ public class HTTPSWebUtilDomi {
             os.close();
             connection.disconnect();
             return new String(baos.toByteArray(), "UTF-8");
-        }catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
             return "";
         }
@@ -168,7 +168,7 @@ public class HTTPSWebUtilDomi {
             connection.disconnect();
 
             return new String(baos.toByteArray(), "UTF-8");
-        }catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
             return "";
         }

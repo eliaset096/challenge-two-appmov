@@ -26,8 +26,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
-    public void removePokemon(){}
-
+    public void removePokemon() {
+    }
 
 
 }

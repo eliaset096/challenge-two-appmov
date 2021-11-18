@@ -7,14 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.mobileapps.reto2_appmov.R;
 import com.mobileapps.reto2_appmov.databinding.ActivityHomeBinding;
 import com.mobileapps.reto2_appmov.model.Pokemon;
+import com.mobileapps.reto2_appmov.model.Trainer;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button btCatchPokemon, btSearchPokemon;
+    // El trainer actual
+    private Trainer trainer;
 
+    private FirebaseFirestore DB = FirebaseFirestore.getInstance();
     // Permite acceso a los elementos gráficos
     private ActivityHomeBinding homeBinding;
 
@@ -24,8 +29,23 @@ public class HomeActivity extends AppCompatActivity {
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(homeBinding.getRoot());
 
-        btSearchPokemon = findViewById(R.id.btSearchPokemon);
-        btSearchPokemon.setOnClickListener(this::searchPokemon);
+        // Se recupera el trainer actual
+        trainer = (Trainer) getIntent().getExtras().get("trainer");
+
+        // Monitorea la acción de click sobre el botón
+        homeBinding.btSearchPokemon.setOnClickListener(this::searchPokemon);
+
+        // recupera las trainer
+        DB.collection("trainers").get().addOnCompleteListener(
+                task -> {
+                    for (DocumentSnapshot doc : task.getResult()) {
+                        Trainer trainer = doc.toObject(Trainer.class);
+                        //users.add(user);
+                        //adapter.notifyDataSetChanged();
+                    }
+                }
+        );
+
 
     }
 
@@ -34,23 +54,13 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void addPokemon(Pokemon pokemon){
+    public void addPokemon(Pokemon pokemon) {
 
     }
 
-    private void getPokemon(){
+    private void getPokemon() {
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

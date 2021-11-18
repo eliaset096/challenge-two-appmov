@@ -40,9 +40,9 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> implements
         return pokemons.size();
     }
 
-    public void addPokemon(Pokemon pokemon){
+    public void addPokemon(Pokemon pokemon) {
         pokemons.add(pokemon);
-        notifyItemInserted(pokemons.size()-1);
+        notifyItemInserted(pokemons.size() - 1);
     }
 
 
