@@ -1,5 +1,6 @@
 package com.mobileapps.reto2_appmov.model;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> implements
     //
     private ArrayList<Pokemon> pokemons;
 
+    public PokemonAdapter(){
+        pokemons = new ArrayList<>();
+    }
+
 
     @NonNull
     @Override
@@ -31,8 +36,9 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> implements
     public void onBindViewHolder(@NonNull PokemonView holder, int position) {
         Pokemon pokemon = pokemons.get(position);
         holder.setPokemon(pokemon);
+        holder.setPokemon(pokemon);
         holder.getTvNamePokemonRow().setText(pokemon.getName());
-
+        // Aquí falta ponerle la foto al pokemon
     }
 
     @Override
@@ -40,16 +46,19 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> implements
         return pokemons.size();
     }
 
+
     public void addPokemon(Pokemon pokemon) {
         pokemons.add(pokemon);
         notifyItemInserted(pokemons.size() - 1);
     }
 
-
     @Override
     public void onSelect(Pokemon pokemon) {
         // La acción cuando se selecciona un pokemon en la lista
 
-
     }
+
+
+
+
 }

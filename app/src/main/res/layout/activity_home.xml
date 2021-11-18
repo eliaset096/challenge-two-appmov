@@ -17,8 +17,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilCatchPokemon"
-            android:layout_width="331dp"
-            android:layout_height="48dp"
+            android:layout_width="330dp"
+            android:layout_height="67dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/btCatchPokemon"
@@ -69,8 +69,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilSearchPokemon"
-            android:layout_width="256dp"
-            android:layout_height="48dp"
+            android:layout_width="260dp"
+            android:layout_height="68dp"
             android:layout_marginStart="13dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="14dp"
@@ -80,7 +80,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="57dp"
                 android:hint="Buscar " />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,10 +88,12 @@
             android:id="@+id/btSearchPokemon"
             android:layout_width="62dp"
             android:layout_height="48dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="30dp"
             android:text=">>"
             android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/rvPokemonList"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tilSearchPokemon"
             app:layout_constraintTop_toTopOf="parent" />
