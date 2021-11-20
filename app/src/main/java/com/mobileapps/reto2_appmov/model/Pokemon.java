@@ -2,8 +2,12 @@ package com.mobileapps.reto2_appmov.model;
 
 import java.io.Serializable;
 
+/**
+ * Entidad que representa un pokemon
+ */
 public class Pokemon implements Serializable {
 
+    // Atributos
     private String id;
     private String avatarUri;
     private String name;
@@ -13,9 +17,9 @@ public class Pokemon implements Serializable {
     private String speed;
     private String life;
 
+    // Constructores
     public Pokemon() {
     }
-
     public Pokemon(String id, String avatarUri, String name, String ability, String defense, String attack, String speed, String life) {
         this.id = id;
         this.avatarUri = avatarUri;
@@ -27,7 +31,7 @@ public class Pokemon implements Serializable {
         this.life = life;
     }
 
-
+    // Métodos
     public String getId() {
         return id;
     }

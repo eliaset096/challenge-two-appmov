@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,13 +20,12 @@ public class DetailsActivity extends AppCompatActivity {
 
     // el pokemon actual
     private Pokemon pokemon;
+
     // el trainer actual
     private Trainer trainer;
 
     // Permite acceso a los elementos gráficos
     private ActivityDetailsBinding detailsBinding;
-
-
 
 
     @SuppressLint("SetTextI18n")
@@ -35,11 +35,12 @@ public class DetailsActivity extends AppCompatActivity {
         detailsBinding = ActivityDetailsBinding.inflate(getLayoutInflater());
         setContentView(detailsBinding.getRoot());
 
-        // Se recupera el pokemon seleccionado desde la lista con su trainer
+        // Recupera el pokemon seleccionado en el recycler view
         pokemon = (Pokemon) getIntent().getExtras().get("pokemon");
+        // Recupera el trainer al que pertenece el pokemon
         trainer = (Trainer) getIntent().getExtras().get("trainer");
 
-        // Se actualiza los valores de los atributos del pokemon
+        // Se actualiza los valores en el apartado gráfico con los atributos del pokemon
         Glide.with(this).load(pokemon.getAvatarUri()).into(detailsBinding.ivPhotoPokemon);
         detailsBinding.tvNamePokemon.setText(pokemon.getName());
         detailsBinding.tvPowerPokemon.setText("(" + pokemon.getAbility() + ")");
@@ -48,14 +49,15 @@ public class DetailsActivity extends AppCompatActivity {
         detailsBinding.tvSpeed.setText(pokemon.getSpeed());
         detailsBinding.tvLife.setText(pokemon.getLife());
 
+        // Elimina un pokemon de la colección y el recyclewr view
         detailsBinding.btDropPokemon.setOnClickListener(
                 v -> {
                     FirebaseFirestore.getInstance().collection("trainers").document(trainer.getId())
                             .collection("pokemons").document(pokemon.getId()).delete()
                             .addOnSuccessListener(
                                     task -> {
-                                        Log.e(">>>", "Pokemon " + pokemon.getName() + " eliminado exitosamente");
-                                        //Toast.makeText(this,"Pokemon "+ pokemon.getName()+" eliminado exitosamente", Toast.LENGTH_LONG).show();
+                                        //Log.e(">>>", "Pokemon " + pokemon.getName() + " eliminado exitosamente");
+                                        Toast.makeText(this,"Pokemon "+ pokemon.getName()+" eliminado exitosamente", Toast.LENGTH_LONG).show();
                                         finish();
                                     }
                             ).addOnFailureListener(
@@ -65,7 +67,8 @@ public class DetailsActivity extends AppCompatActivity {
                     );
                 }
         );
-
     }
+
+
 
 }

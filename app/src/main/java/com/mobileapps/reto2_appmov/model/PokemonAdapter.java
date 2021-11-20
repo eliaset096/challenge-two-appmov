@@ -17,14 +17,14 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
 
     // Una lista de pokemones
     private ArrayList<Pokemon> pokemons;
+
+    // El trainer actual
     private Trainer trainer;
-    private boolean isDelete;
 
-
+    // Constructor
     public PokemonAdapter(){
         pokemons = new ArrayList<>();
         trainer = new Trainer();
-        isDelete = false;
     }
 
     @NonNull
@@ -51,39 +51,25 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
         return pokemons.size();
     }
 
+    /**
+     * Agrega un pokemon a la lista
+     */
     public void addPokemon(Pokemon pokemon) {
         pokemons.add(pokemon);
         notifyItemInserted(pokemons.size()-1);
     }
 
+    /**
+     * Recibe el trainer actual
+     * @param trainer
+     */
     public void receiveTrainer(Trainer trainer){
         this.trainer = trainer;
     }
 
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(boolean delete) {
-        isDelete = delete;
-    }
-
-
-    public void onDelete(Pokemon pokemon) {
-        int i = pokemons.indexOf(pokemon);
-        pokemons.remove(i);
-        notifyItemRemoved(i);
-    }
-
-    public ArrayList<Pokemon> getPokemons() {
-        return pokemons;
-    }
-
-    public void setPokemons(ArrayList<Pokemon> pokemons) {
-        this.pokemons = pokemons;
-    }
-
-
+    /**
+     * Limpia la lista de pokemones
+     */
     public void clear() {
         int size = pokemons.size();
         if (size > 0) {

@@ -18,6 +18,9 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+/**
+ * Implementación de los métodos de una request.
+ */
 public class HTTPSWebUtilDomi {
 
     public HTTPSWebUtilDomi() {
@@ -26,10 +29,8 @@ public class HTTPSWebUtilDomi {
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
-
                 public void checkClientTrusted(X509Certificate[] certs, String authType) {
                 }
-
                 public void checkServerTrusted(X509Certificate[] certs, String authType) {
                 }
             }

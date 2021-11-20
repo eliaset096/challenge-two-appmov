@@ -16,10 +16,13 @@ import java.util.UUID;
 
 public class LoginActivity extends AppCompatActivity {
 
+    // Acceso a la base de datos de Firebase
     private FirebaseFirestore DB = FirebaseFirestore.getInstance();
 
     // Permite acceso a los elementos gráficos
     private ActivityLoginBinding loginBinding;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +32,11 @@ public class LoginActivity extends AppCompatActivity {
 
         // Monitorea la acción de click sobre el botón
         loginBinding.btLogin.setOnClickListener(this::login);
-
     }
 
 
     /**
-     * Permite loguearse en la aplicación
-     *
+     * Permite a un trainer loguearse en la aplicación
      * @param view
      */
     private void login(View view) {
@@ -43,14 +44,14 @@ public class LoginActivity extends AppCompatActivity {
         Query query = DB.collection("trainers").whereEqualTo("name", newTrainer.getName());
         query.get().addOnCompleteListener(
                 task -> {
-                    //Si el usuario no existe crearlo e iniciar sesion con él
+                    // Crea una trainer
                     if (task.getResult().size() == 0) {
                         DB.collection("trainers").document(newTrainer.getId()).set(newTrainer);
                         Intent intent = new Intent(view.getContext(), HomeActivity.class);
                         intent.putExtra("trainer", newTrainer);
                         startActivity(intent);
                     }
-                    //Si ya existe, descargar el usuario e iniciar sesion con el
+                    // Descarga el trainer existente
                     else {
                         Trainer existingTrainer = null;
                         for (DocumentSnapshot doc : task.getResult()) {

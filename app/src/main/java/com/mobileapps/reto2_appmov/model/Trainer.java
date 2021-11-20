@@ -2,19 +2,25 @@ package com.mobileapps.reto2_appmov.model;
 
 import java.io.Serializable;
 
+/**
+ * Entidad que representa un entrenador
+ */
 public class Trainer implements Serializable {
+
+    // Atributos
     private String id;
     private String name;
 
+    // Construcotres
     public Trainer() {
     }
-
     public Trainer(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
 
+    // Métodos
     public String getId() {
         return id;
     }

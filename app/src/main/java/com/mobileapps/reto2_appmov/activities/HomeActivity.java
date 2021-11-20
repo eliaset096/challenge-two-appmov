@@ -26,10 +26,14 @@ public class HomeActivity extends AppCompatActivity {
 
     // El trainer actual
     private Trainer trainer;
-    //
+
+    // Acceso a la base de datos de Firebase
     private FirebaseFirestore DB = FirebaseFirestore.getInstance();
+
     // Permite acceso a los elementos gráficos
     private ActivityHomeBinding homeBinding;
+
+    // El adapter del recycler view
     private PokemonAdapter adapter;
 
     @Override
@@ -38,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(homeBinding.getRoot());
 
-        // Se recupera el trainer actual
+        // Se recupera el trainer logueado
         trainer = (Trainer) getIntent().getExtras().get("trainer");
 
         // recupera los pokemons del trainer
@@ -50,10 +54,9 @@ public class HomeActivity extends AppCompatActivity {
         adapter = new PokemonAdapter();
         homeBinding.rvPokemonList.setAdapter(adapter);
 
-        //
+        // Atrapa un nuevo pokemon al clickear el botón
         homeBinding.btCatchPokemon.setOnClickListener(
                 v -> {
-                    // Atrapa un pokemon por el nombre
                     catchPokemon(homeBinding.tilCatchPokemon.getEditText().getText().toString().toLowerCase().replace(" ",""));
                 }
         );
@@ -63,9 +66,12 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    // Busca un pokemon en el api
+    /**
+     * Atrapa un nuevo pokemon por el nombre
+     * @param pokemonName
+     */
     private void catchPokemon(String pokemonName) {
-        // Falta manejar la ecepción que se lanza cuando el pokemon no se encuentra
+        // TODO Falta manejar la ecepción que se lanza cuando el pokemon no se encuentra
         new Thread(
                 () -> {
                     try {
@@ -73,7 +79,6 @@ public class HomeActivity extends AppCompatActivity {
                         String json = utilDomi.GETrequest(pokemonName);
                         Gson gson = new Gson();
                         PokemonResponse response = gson.fromJson(json, PokemonResponse.class);
-
                         Pokemon pokemon = new Pokemon(
                                 UUID.randomUUID().toString(),
                                 response.getSprites().getFront_default(),
@@ -83,10 +88,8 @@ public class HomeActivity extends AppCompatActivity {
                                 response.getStats()[1].getBase_stat(),
                                 response.getStats()[5].getBase_stat(),
                                 response.getStats()[0].getBase_stat());
-
                         adapter.addPokemon(pokemon);
                         addPokemon(pokemon);
-
                     } catch (NullPointerException e) {
                         Toast.makeText(this, "El pokemon que ha buscado no existe", Toast.LENGTH_LONG).show();
                     }
@@ -94,13 +97,19 @@ public class HomeActivity extends AppCompatActivity {
         ).start();
     }
 
-    // agrega un pokemon a la coelcción
+
+    /**
+     * Agrega un pokemon atrapado a la lista del trainer
+     * @param pokemon
+     */
     public void addPokemon(Pokemon pokemon) {
         DB.collection("trainers").document(trainer.getId())
                 .collection("pokemons").document(pokemon.getId()).set(pokemon);
     }
 
-    // Trae los pokemons de la colección en la base de datos
+    /**
+     * Trae los pokemons de la colección del trainer en la base de datos
+     */
     private void getPokemons() {
         DB.collection("trainers").document(trainer.getId())
                 .collection("pokemons").get().addOnCompleteListener(

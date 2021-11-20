@@ -1,13 +1,18 @@
 package com.mobileapps.reto2_appmov.pokeapi;
 
+/**
+ * Es la respuesta de la request a la pokeapi
+ */
 public class PokemonResponse {
 
+    // Atributos
     private String id;
     private String name;
     private Abilities[] abilities;
     private Stats[] stats;
     private Sprites sprites;
 
+    // Constructores
     public PokemonResponse() {
     }
     public PokemonResponse(String id, String name, Abilities[] abilities, Stats[] stats, Sprites sprites) {
@@ -18,6 +23,7 @@ public class PokemonResponse {
         this.sprites = sprites;
     }
 
+    // Métodos
     public String getId() {
         return id;
     }

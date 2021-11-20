@@ -15,18 +15,13 @@ import com.mobileapps.reto2_appmov.activities.DetailsActivity;
 
 public class PokemonView extends RecyclerView.ViewHolder {
 
-    // UI
+    // Elementos gráficos del item
     private TextView tvNamePokemonRow;
     private ImageView ivPhotoPokemonRow;
+
     // State
     private Pokemon pokemon;
     private Trainer trainer;
-
-
-    /*ActivityResultLauncher<Intent> launcher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), this::onResult
-    );*/
-
 
 
     public PokemonView(@NonNull View itemView) {
@@ -36,6 +31,7 @@ public class PokemonView extends RecyclerView.ViewHolder {
         tvNamePokemonRow = itemView.findViewById(R.id.tvNamePokemonRow);
         ivPhotoPokemonRow = itemView.findViewById(R.id.ivPhotoPokemonRow);
 
+        // Lanza la actividad de Detalles del pokemon
         itemView.setOnLongClickListener(
                 v -> {
                     Intent intent = new Intent(context, DetailsActivity.class);
@@ -45,7 +41,6 @@ public class PokemonView extends RecyclerView.ViewHolder {
                     return true;
                 }
         );
-
 
     }
 
