@@ -1,8 +1,12 @@
 package com.mobileapps.reto2_appmov.activities;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -46,13 +50,11 @@ public class HomeActivity extends AppCompatActivity {
         adapter = new PokemonAdapter();
         homeBinding.rvPokemonList.setAdapter(adapter);
 
-
         //
         homeBinding.btCatchPokemon.setOnClickListener(
                 v -> {
                     // Atrapa un pokemon por el nombre
                     catchPokemon(homeBinding.tilCatchPokemon.getEditText().getText().toString().toLowerCase().replace(" ",""));
-                    //getPokemons();
                 }
         );
 
@@ -72,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
                         Gson gson = new Gson();
                         PokemonResponse response = gson.fromJson(json, PokemonResponse.class);
 
-                        addPokemon(new Pokemon(
+                        Pokemon pokemon = new Pokemon(
                                 UUID.randomUUID().toString(),
                                 response.getSprites().getFront_default(),
                                 response.getName(),
@@ -80,8 +82,11 @@ public class HomeActivity extends AppCompatActivity {
                                 response.getStats()[2].getBase_stat(),
                                 response.getStats()[1].getBase_stat(),
                                 response.getStats()[5].getBase_stat(),
-                                response.getStats()[0].getBase_stat())
-                        );
+                                response.getStats()[0].getBase_stat());
+
+                        adapter.addPokemon(pokemon);
+                        addPokemon(pokemon);
+
                     } catch (NullPointerException e) {
                         Toast.makeText(this, "El pokemon que ha buscado no existe", Toast.LENGTH_LONG).show();
                     }
@@ -104,13 +109,24 @@ public class HomeActivity extends AppCompatActivity {
                             task.getResult()) {
                         Pokemon pokemon = snapshot.toObject(Pokemon.class);
                         adapter.addPokemon(pokemon);
+                        adapter.receiveTrainer(trainer);
                     }
                 }
         );
     }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapter.clear();
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getPokemons();
+    }
 
 
 }

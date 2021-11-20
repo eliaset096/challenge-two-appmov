@@ -10,7 +10,6 @@ public class PokemonResponse {
 
     public PokemonResponse() {
     }
-
     public PokemonResponse(String id, String name, Abilities[] abilities, Stats[] stats, Sprites sprites) {
         this.id = id;
         this.name = name;

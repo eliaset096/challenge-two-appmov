@@ -1,6 +1,8 @@
 package com.mobileapps.reto2_appmov.model;
 
-public class Pokemon {
+import java.io.Serializable;
+
+public class Pokemon implements Serializable {
 
     private String id;
     private String avatarUri;

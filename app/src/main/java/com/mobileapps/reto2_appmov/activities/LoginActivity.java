@@ -5,15 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.mobileapps.reto2_appmov.R;
 import com.mobileapps.reto2_appmov.databinding.ActivityLoginBinding;
-import com.mobileapps.reto2_appmov.model.Pokemon;
 import com.mobileapps.reto2_appmov.model.Trainer;
 
 import java.util.UUID;
@@ -70,4 +66,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
         );
     }
+
+
+
+
+
 }
