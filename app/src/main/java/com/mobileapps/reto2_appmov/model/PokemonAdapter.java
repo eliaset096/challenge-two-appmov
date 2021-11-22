@@ -1,15 +1,20 @@
 package com.mobileapps.reto2_appmov.model;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.mobileapps.reto2_appmov.R;
 import com.mobileapps.reto2_appmov.activities.DetailsActivity;
+import com.mobileapps.reto2_appmov.activities.HomeActivity;
+import com.mobileapps.reto2_appmov.util.NotExistNameException;
 
 import java.util.ArrayList;
 
@@ -18,12 +23,17 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
     // Una lista de pokemones
     private ArrayList<Pokemon> pokemons;
 
+    private ArrayList<Pokemon> pokemonsSearched;
+
     // El trainer actual
     private Trainer trainer;
 
+    private Context context;
+
     // Constructor
-    public PokemonAdapter(){
+    public PokemonAdapter() {
         pokemons = new ArrayList<>();
+        pokemonsSearched = new ArrayList<>();
         trainer = new Trainer();
     }
 
@@ -32,6 +42,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
     public PokemonView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.pokemon_row, parent, false);
+        context = view.getContext();
         PokemonView holder = new PokemonView(view);
         return holder;
     }
@@ -56,14 +67,15 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
      */
     public void addPokemon(Pokemon pokemon) {
         pokemons.add(pokemon);
-        notifyItemInserted(pokemons.size()-1);
+        notifyItemInserted(pokemons.size() - 1);
     }
 
     /**
      * Recibe el trainer actual
+     *
      * @param trainer
      */
-    public void receiveTrainer(Trainer trainer){
+    public void receiveTrainer(Trainer trainer) {
         this.trainer = trainer;
     }
 
@@ -80,6 +92,30 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
         }
     }
 
+    public void searchPokemon(String namePokemon) {
+        for (Pokemon pokemon :
+                pokemons) {
+            if (pokemon.getName().equalsIgnoreCase(namePokemon)) {
+                pokemonsSearched.add(pokemon);
+            }
+        }
+        this.pokemons = pokemonsSearched;
+    }
 
 
+    public ArrayList<Pokemon> getPokemons() {
+        return pokemons;
+    }
+
+    public void setPokemons(ArrayList<Pokemon> pokemons) {
+        this.pokemons = pokemons;
+    }
+
+    public ArrayList<Pokemon> getPokemonsSearched() {
+        return pokemonsSearched;
+    }
+
+    public void setPokemonsSearched(ArrayList<Pokemon> pokemonsSearched) {
+        this.pokemonsSearched = pokemonsSearched;
+    }
 }

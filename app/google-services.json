@@ -1,91 +1,33 @@
 {
   "project_info": {
-    "project_number": "40069805376",
-    "project_id": "fcmejemplo-appmov",
-    "storage_bucket": "fcmejemplo-appmov.appspot.com"
+    "project_number": "65332085808",
+    "project_id": "appsmobiles-15ffe",
+    "storage_bucket": "appsmobiles-15ffe.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:40069805376:android:7012a598dd47f6023b36a5",
-        "android_client_info": {
-          "package_name": "com.mobileapps.fcmnotifications_appmov"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "40069805376-n13v4f1pr40uj9aqs69s0qvn2q8n2mmd.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDLTH-AKPg1TurD6qXBS5nZZMF3Pcvq_CA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "40069805376-n13v4f1pr40uj9aqs69s0qvn2q8n2mmd.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:40069805376:android:ad1703da705ac80b3b36a5",
+        "mobilesdk_app_id": "1:65332085808:android:05ec5eb3dad3e95cb499f5",
         "android_client_info": {
           "package_name": "com.mobileapps.reto2_appmov"
         }
       },
       "oauth_client": [
         {
-          "client_id": "40069805376-n13v4f1pr40uj9aqs69s0qvn2q8n2mmd.apps.googleusercontent.com",
+          "client_id": "65332085808-durr4aag7mfe1h2fqtu43cli09ba5lc9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDLTH-AKPg1TurD6qXBS5nZZMF3Pcvq_CA"
+          "current_key": "AIzaSyC3eJ2iZNuFlAhwnnjcBwLqWVupsFV7Bf4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "40069805376-n13v4f1pr40uj9aqs69s0qvn2q8n2mmd.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:40069805376:android:c59801c7ee9e32fc3b36a5",
-        "android_client_info": {
-          "package_name": "edu.co.icesi.firestoreejemplokotlin"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "40069805376-n13v4f1pr40uj9aqs69s0qvn2q8n2mmd.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDLTH-AKPg1TurD6qXBS5nZZMF3Pcvq_CA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "40069805376-n13v4f1pr40uj9aqs69s0qvn2q8n2mmd.apps.googleusercontent.com",
+              "client_id": "65332085808-durr4aag7mfe1h2fqtu43cli09ba5lc9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

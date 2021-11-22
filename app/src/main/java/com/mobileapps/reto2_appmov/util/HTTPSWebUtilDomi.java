@@ -2,6 +2,7 @@ package com.mobileapps.reto2_appmov.util;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -55,7 +56,7 @@ public class HTTPSWebUtilDomi {
         }
     }
 
-    public String GETrequest(String pokemonName) {
+    public String GETrequest(String pokemonName) throws FileNotFoundException {
         try {
             // URL de la pokeapi
             URL page = new URL("https://pokeapi.co/api/v2/pokemon/" + pokemonName);
