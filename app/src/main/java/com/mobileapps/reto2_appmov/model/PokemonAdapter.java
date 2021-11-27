@@ -1,12 +1,14 @@
 package com.mobileapps.reto2_appmov.model;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +19,8 @@ import com.mobileapps.reto2_appmov.activities.HomeActivity;
 import com.mobileapps.reto2_appmov.util.NotExistNameException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
 
@@ -35,6 +39,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
         pokemons = new ArrayList<>();
         pokemonsSearched = new ArrayList<>();
         trainer = new Trainer();
+
+
     }
 
     @NonNull

@@ -1,11 +1,14 @@
 package com.mobileapps.reto2_appmov.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -20,7 +23,10 @@ import com.mobileapps.reto2_appmov.util.HTTPSWebUtilDomi;
 import com.mobileapps.reto2_appmov.util.NotExistNameException;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.UUID;
 
 public class HomeActivity extends AppCompatActivity {
@@ -39,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private ArrayList<Pokemon> pokemonList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +61,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // recupera los pokemons del trainer
         getPokemons();
+        //addPokemonsToList();
 
         // configuración del recycler view
         homeBinding.rvPokemonList.setHasFixedSize(true);
@@ -71,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
         // Monitorea la acción de click sobre el botón
         homeBinding.btSearchPokemon.setOnClickListener(
                 v -> {
-                    if (homeBinding.tilSearchPokemon.getEditText().getLineCount()!=0) {
+                    if (homeBinding.tilSearchPokemon.getEditText().getLineCount() != 0) {
                         searchPokemon(homeBinding.tilSearchPokemon.getEditText().getText().toString().toLowerCase().replace(" ", ""));
                     }
                 }
@@ -80,15 +88,19 @@ public class HomeActivity extends AppCompatActivity {
 
         homeBinding.tilSearchPokemon.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().trim().length()==0){
+                if (s.toString().trim().length() == 0) {
                     adapter.clear();
                     getPokemons();
+                    //addPokemonsToList();
                 }
                 //homeBinding.tilSearchPokemon.getEditText().setClickable(false);
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -99,6 +111,7 @@ public class HomeActivity extends AppCompatActivity {
 
     /**
      * Atrapa un nuevo pokemon por el nombre
+     *
      * @param pokemonName
      */
     private void catchPokemon(String pokemonName) {
@@ -118,7 +131,9 @@ public class HomeActivity extends AppCompatActivity {
                                     response.getStats()[2].getBase_stat(),
                                     response.getStats()[1].getBase_stat(),
                                     response.getStats()[5].getBase_stat(),
-                                    response.getStats()[0].getBase_stat());
+                                    response.getStats()[0].getBase_stat(),
+                                    putLastOrder());
+
                             adapter.addPokemon(pokemon);
                             addPokemon(pokemon);
                         } else {
@@ -135,14 +150,45 @@ public class HomeActivity extends AppCompatActivity {
         ).start();
     }
 
+    // TODO Corregir esto. La búsqueda del pokemon debe realizarse directamente en la base datos y no de manera local
     public void searchPokemon(String namePokemon) {
-        adapter.searchPokemon(namePokemon);
-        
+        adapter.clear();
+        DB.collection("trainers").document(trainer.getId())
+                .collection("pokemons").whereEqualTo("name", namePokemon)
+                .get().addOnCompleteListener(
+                task -> {
+                    for (DocumentSnapshot snapshot :
+                            task.getResult()) {
+                        Pokemon pokemon = snapshot.toObject(Pokemon.class);
+                        Log.w(">>>", pokemon.getId() + " - " + pokemon.getName());
+
+                        adapter.addPokemon(pokemon);
+                        //pokemonList.add()
+                        //pokemonList.add(pokemon);
+                        adapter.receiveTrainer(trainer);
+
+
+                    }
+                }
+        );
+        //adapter.searchPokemon(namePokemon);
+    }
+
+    private int putLastOrder() {
+        int inc = 0;
+        for (int i = 0; i < adapter.getPokemons().size(); i++) {
+            if (adapter.getPokemons().get(i).getCathingOrder() > inc) {
+                inc = adapter.getPokemons().get(i).getCathingOrder();
+            }
+        }
+        inc += 1;
+        return inc;
     }
 
 
     /**
      * Agrega un pokemon atrapado a la lista del trainer
+     *
      * @param pokemon
      */
     public void addPokemon(Pokemon pokemon) {
@@ -155,21 +201,42 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void getPokemons() {
         DB.collection("trainers").document(trainer.getId())
-                .collection("pokemons").get().addOnCompleteListener(
-                task -> {
-                    for (DocumentSnapshot snapshot :
-                            task.getResult()) {
-                        Pokemon pokemon = snapshot.toObject(Pokemon.class);
-                        adapter.addPokemon(pokemon);
-                        pokemonList.add(pokemon);
-                        adapter.receiveTrainer(trainer);
-                    }
-                }
-        );
+                .collection("pokemons").orderBy("cathingOrder").get()
+                .addOnCompleteListener(
+                        task -> {
+                            for (DocumentSnapshot snapshot :
+                                    task.getResult()) {
+                                Pokemon pokemon = snapshot.toObject(Pokemon.class);
+                                //pokemonList.add(pokemon);
+                                //addPokemonsToList();
+                                //adapter.addPokemon(pokemon);
+                                //pokemonList.add(pokemon);
+
+                                adapter.addPokemon(pokemon);
+                                Log.w("Order", pokemon.getCathingOrder() + "-" + pokemon.getName());
+
+                                adapter.receiveTrainer(trainer);
+
+                            }
+                        }
+                );
+        //addPokemonsToList();
     }
 
 
-
+    public void addPokemonsToList() {
+        Collections.sort(pokemonList, new Comparator<Pokemon>() {
+            @Override
+            public int compare(Pokemon pok1, Pokemon pok2) {
+                return Integer.compare(pok1.getCathingOrder(), pok2.getCathingOrder());
+            }
+        });
+        for (Pokemon pokemon :
+                pokemonList) {
+            adapter.addPokemon(pokemon);
+            adapter.receiveTrainer(trainer);
+        }
+    }
 
 
     @Override
@@ -182,6 +249,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         getPokemons();
+        //addPokemonsToList();
     }
 
 
