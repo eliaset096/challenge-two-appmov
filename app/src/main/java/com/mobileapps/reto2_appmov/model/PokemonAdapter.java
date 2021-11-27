@@ -32,7 +32,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
     // El trainer actual
     private Trainer trainer;
 
-    private Context context;
 
     // Constructor
     public PokemonAdapter() {
@@ -48,7 +47,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
     public PokemonView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.pokemon_row, parent, false);
-        context = view.getContext();
         PokemonView holder = new PokemonView(view);
         return holder;
     }
@@ -72,8 +70,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
      * Agrega un pokemon a la lista
      */
     public void addPokemon(Pokemon pokemon) {
-        pokemons.add(pokemon);
-        notifyItemInserted(pokemons.size() - 1);
+        pokemons.add(0, pokemon);
+        notifyItemInserted(0);
     }
 
     /**

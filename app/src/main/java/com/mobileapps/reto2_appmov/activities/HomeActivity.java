@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.gson.Gson;
 import com.mobileapps.reto2_appmov.databinding.ActivityHomeBinding;
 import com.mobileapps.reto2_appmov.model.Pokemon;
@@ -150,7 +151,10 @@ public class HomeActivity extends AppCompatActivity {
         ).start();
     }
 
-    // TODO Corregir esto. La búsqueda del pokemon debe realizarse directamente en la base datos y no de manera local
+    /**
+     *
+     * @param namePokemon
+     */
     public void searchPokemon(String namePokemon) {
         adapter.clear();
         DB.collection("trainers").document(trainer.getId())
@@ -161,13 +165,10 @@ public class HomeActivity extends AppCompatActivity {
                             task.getResult()) {
                         Pokemon pokemon = snapshot.toObject(Pokemon.class);
                         Log.w(">>>", pokemon.getId() + " - " + pokemon.getName());
-
                         adapter.addPokemon(pokemon);
                         //pokemonList.add()
                         //pokemonList.add(pokemon);
                         adapter.receiveTrainer(trainer);
-
-
                     }
                 }
         );
@@ -201,7 +202,7 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void getPokemons() {
         DB.collection("trainers").document(trainer.getId())
-                .collection("pokemons").orderBy("cathingOrder").get()
+                .collection("pokemons").orderBy("cathingOrder", Query.Direction.ASCENDING).get()
                 .addOnCompleteListener(
                         task -> {
                             for (DocumentSnapshot snapshot :
@@ -214,7 +215,6 @@ public class HomeActivity extends AppCompatActivity {
 
                                 adapter.addPokemon(pokemon);
                                 Log.w("Order", pokemon.getCathingOrder() + "-" + pokemon.getName());
-
                                 adapter.receiveTrainer(trainer);
 
                             }
