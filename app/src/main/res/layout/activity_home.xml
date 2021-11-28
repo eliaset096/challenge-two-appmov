@@ -4,12 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_fondo"
     tools:context=".activities.HomeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/custom_toast_form"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,27 +23,36 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilCatchPokemon"
-            android:layout_width="331dp"
-            android:layout_height="48dp"
+            android:layout_width="0dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="50dp"
             android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
             app:layout_constraintBottom_toTopOf="@+id/btCatchPokemon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Atrapa pokemon" />
+                android:hint="Nombre del pokemon"
+                android:textAlignment="center" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btCatchPokemon"
-            android:layout_width="wrap_content"
+            android:layout_width="144dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="32dp"
+            android:background="#CCFF5C5C"
+            android:fontFamily="sans-serif-medium"
             android:text="Atrapar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +65,11 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/custom_toast_form"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
@@ -58,10 +78,12 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="182dp"
+            android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-black"
             android:text="Mis pokemons"
+            android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,29 +91,35 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilSearchPokemon"
-            android:layout_width="256dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="13dp"
+            android:layout_width="0dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="14dp"
+            android:layout_marginEnd="40dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
             app:layout_constraintEnd_toStartOf="@+id/btSearchPokemon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="57dp"
                 android:hint="Buscar " />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btSearchPokemon"
-            android:layout_width="62dp"
+            android:layout_width="59dp"
             android:layout_height="48dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="#CCFF5C5C"
+            android:fontFamily="sans-serif-medium"
             android:text=">>"
             android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/rvPokemonList"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tilSearchPokemon"
             app:layout_constraintTop_toTopOf="parent" />
