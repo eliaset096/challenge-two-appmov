@@ -27,7 +27,6 @@ public class DetailsActivity extends AppCompatActivity {
     // Permite acceso a los elementos gráficos
     private ActivityDetailsBinding detailsBinding;
 
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,6 @@ public class DetailsActivity extends AppCompatActivity {
                             .collection("pokemons").document(pokemon.getId()).delete()
                             .addOnSuccessListener(
                                     task -> {
-                                        //Log.e(">>>", "Pokemon " + pokemon.getName() + " eliminado exitosamente");
                                         Toast.makeText(this,"Pokemon "+ pokemon.getName()+" eliminado exitosamente", Toast.LENGTH_LONG).show();
                                         finish();
                                     }
@@ -68,7 +66,4 @@ public class DetailsActivity extends AppCompatActivity {
                 }
         );
     }
-
-
-
 }

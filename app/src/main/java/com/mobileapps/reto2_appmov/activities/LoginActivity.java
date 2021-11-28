@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -22,15 +23,13 @@ public class LoginActivity extends AppCompatActivity {
     // Permite acceso a los elementos gráficos
     private ActivityLoginBinding loginBinding;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(loginBinding.getRoot());
 
-        // Monitorea la acción de click sobre el botón
+        // Monitorea la acción de click sobre el botón - permite loguearse en la aplicación.
         loginBinding.btLogin.setOnClickListener(this::login);
     }
 
@@ -64,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                     }
+                }
+        ).addOnFailureListener(
+                e ->{
+                    Log.e("Error: ", e.getMessage());
                 }
         );
     }

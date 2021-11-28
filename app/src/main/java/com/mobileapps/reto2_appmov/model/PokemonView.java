@@ -23,7 +23,6 @@ public class PokemonView extends RecyclerView.ViewHolder {
     private Pokemon pokemon;
     private Trainer trainer;
 
-
     public PokemonView(@NonNull View itemView) {
         super(itemView);
         Context context = itemView.getContext();
@@ -41,7 +40,6 @@ public class PokemonView extends RecyclerView.ViewHolder {
                     return true;
                 }
         );
-
     }
 
     public void setPokemon(Pokemon pokemon) {

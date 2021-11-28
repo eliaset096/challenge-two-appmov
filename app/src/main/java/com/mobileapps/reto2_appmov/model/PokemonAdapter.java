@@ -32,14 +32,11 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
     // El trainer actual
     private Trainer trainer;
 
-
     // Constructor
     public PokemonAdapter() {
         pokemons = new ArrayList<>();
         pokemonsSearched = new ArrayList<>();
         trainer = new Trainer();
-
-
     }
 
     @NonNull
@@ -58,7 +55,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
         holder.setTrainer(trainer);
         holder.getTvNamePokemonRow().setText(pokemon.getName());
         Glide.with(holder.getIvPhotoPokemonRow().getContext()).load(pokemon.getAvatarUri()).into(holder.getIvPhotoPokemonRow());
-
     }
 
     @Override
@@ -76,7 +72,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
 
     /**
      * Recibe el trainer actual
-     *
      * @param trainer
      */
     public void receiveTrainer(Trainer trainer) {
@@ -95,17 +90,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonView> {
             notifyItemRangeRemoved(0, size);
         }
     }
-
-    public void searchPokemon(String namePokemon) {
-        for (Pokemon pokemon :
-                pokemons) {
-            if (pokemon.getName().equalsIgnoreCase(namePokemon)) {
-                pokemonsSearched.add(pokemon);
-            }
-        }
-        this.pokemons = pokemonsSearched;
-    }
-
 
     public ArrayList<Pokemon> getPokemons() {
         return pokemons;

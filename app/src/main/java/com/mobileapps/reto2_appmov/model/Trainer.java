@@ -19,7 +19,6 @@ public class Trainer implements Serializable {
         this.name = name;
     }
 
-
     // Métodos
     public String getId() {
         return id;
