@@ -55,7 +55,7 @@ public class DetailsActivity extends AppCompatActivity {
                             .collection("pokemons").document(pokemon.getId()).delete()
                             .addOnSuccessListener(
                                     task -> {
-                                        Toast.makeText(this,"Pokemon "+ pokemon.getName()+" eliminado exitosamente", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(this,"Pokemon "+ pokemon.getName()+" eliminado exitosamente", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                             ).addOnFailureListener(

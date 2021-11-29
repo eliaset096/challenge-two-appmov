@@ -2,6 +2,8 @@ package com.mobileapps.reto2_appmov.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -44,8 +46,17 @@ public class HomeActivity extends AppCompatActivity {
 
         // configuración del recycler view
         homeBinding.rvPokemonList.setHasFixedSize(true);
-        homeBinding.rvPokemonList.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        homeBinding.rvPokemonList.setLayoutManager(linearLayoutManager);
         adapter = new PokemonAdapter();
+        // Hace un scroll top cuando un pokemon es agregado.
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                homeBinding.rvPokemonList.smoothScrollToPosition(0);
+            }
+        });
         homeBinding.rvPokemonList.setAdapter(adapter);
 
         // Se recupera el trainer logueado
